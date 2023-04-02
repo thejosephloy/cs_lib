@@ -1,6 +1,26 @@
 #include <iostream>
 
-int main() {
-	// To do
+int main(int argc, char* argv[]) {
+	// variables
+    int x = 1;
+    char* oldstr = "whats up pahtnuh\n";
+    bool swayHasTheAnswers = false;
+    
+    // If else
+    if (swayHasTheAnswers) {
+        std::cout << "Ok im gonna chill now bro" << std::endl;
+    } else {
+        std::cout << "I am Walt Disney" << std::endl;
+    }
+    
+    // if else if else
+    if (x > 0) {
+        std::cout << "X is positive" << std::endl;
+    } else if (x < 0) {
+        std::cout << "X is negative" << std::endl;
+    }
+    else {
+        std::cout << "X is 0 bruh" << std::endl;
+    }
 	return 0;
 }
