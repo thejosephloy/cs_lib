@@ -9,6 +9,13 @@
 
 using namespace std;
 
+// Counting sort
+
+// Radix sort
+
+// bucket sort
+
+// randomized select 
 
 // subroutine for mergesort 
 vector<int> merge(vector<int>& A, int p, int q, int r) {
