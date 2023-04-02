@@ -9,6 +9,8 @@
 
 using namespace std;
 
+
+// subroutine for mergesort 
 vector<int> merge(vector<int>& A, int p, int q, int r) {
 	// merge
 	int n1 = q - p + 1;
@@ -43,7 +45,7 @@ vector<int> merge(vector<int>& A, int p, int q, int r) {
 	
 	return A;
 }
-
+// mergesort 
 vector<int> mergesort(vector<int>& A, int p, int r) {
 	if (p < r) {
 		int q = (p + r) / 2;
@@ -53,7 +55,7 @@ vector<int> mergesort(vector<int>& A, int p, int r) {
 	}
 	return A;
 }
-
+// sub routine for quicksort 
 int partition(vector<int>& A, int p, int r) {
 	int x = A[r];
 	int i = p - 1;
@@ -73,6 +75,7 @@ int partition(vector<int>& A, int p, int r) {
 	return i + 1;
 }
 
+// quicksort
 void quicksort(vector<int>& A, int p, int r) {
 	if (p < r) {
 		int q = partition(A, p, r);
