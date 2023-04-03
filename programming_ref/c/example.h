@@ -2,7 +2,7 @@
 #define EXAMPLE_H_
 
 void testFunc(void);
-int addN(int n);
+int addN(int* x, int n);
 
 
 #endif

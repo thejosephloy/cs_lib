@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "example.h"
 
 int main(int argc, char* argv[]) {
     // variables
@@ -23,5 +24,8 @@ int main(int argc, char* argv[]) {
     else {
         printf("X is 0 bruh\n");
     }
+
+    x = 10;
+    x = addN(&x, 1);
     return 0;
 }

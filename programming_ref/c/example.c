@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "example.h"
 
 void testFunc() {
     printf("Testing");
