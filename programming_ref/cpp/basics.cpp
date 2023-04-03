@@ -38,8 +38,9 @@ int main(int argc, char* argv[]) {
     
     int N = 5;
     //class instantiation
-    exampleClass test.setup(x);
-    test.addN(N);
+    exampleClass test;
+    test.setup(x);
+    std::cout << test.addN(N) << std::endl;
     //calling class function
     
     return 0;

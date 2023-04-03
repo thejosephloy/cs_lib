@@ -1,6 +1,10 @@
 #include <iostream>
 #include "exampleClass.hpp"
 
+exampleClass::exampleClass() {
+
+}
+
 void exampleClass::setup(int x) {
     var1 = x;
     std::cout << "test var 1 is " << var1 << std::endl;

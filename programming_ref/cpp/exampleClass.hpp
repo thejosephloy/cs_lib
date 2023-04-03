@@ -12,6 +12,7 @@ class exampleClass {
     
     // Public function declarations
     public:
+        exampleClass();
         void setup(int x);
         int addN(int N);
 };
