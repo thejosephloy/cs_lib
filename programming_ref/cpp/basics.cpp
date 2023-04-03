@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-//#include "exampleClass.hpp"
+#include "exampleClass.hpp"
 
 int main(int argc, char* argv[]) {
 	// variables
@@ -35,10 +35,12 @@ int main(int argc, char* argv[]) {
     while (x > 0) {
         std::cout << "x is " << x << std::endl;
     }
+    
+    int N = 5;
     //class instantiation
-    //exampleClass test;
-    //test.exampleFunction();
+    exampleClass test.setup(x);
+    test.addN(N);
     //calling class function
     
-    
+    return 0;
 }
