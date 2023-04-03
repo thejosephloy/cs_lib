@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int main(int argc, char* argv[]) {
     // variables
@@ -7,20 +8,20 @@ int main(int argc, char* argv[]) {
     bool swayHasTheAnswers = false;
     
     // If else
-    if (swayHasTheAnswers) {
-        std::cout << "Ok im gonna chill now bro" << std::endl;
+    if (swayHasTheAnswers == true) {
+        printf("Ok im gonna chill now bro\n");
     } else {
-        std::cout << "I am Walt Disney" << std::endl;
+        printf("I am Walt Disney\n");
     }
     
     // if else if else
     if (x > 0) {
-        std::cout << "X is positive" << std::endl;
+        printf("X is positive\n");
     } else if (x < 0) {
-        std::cout << "X is negative" << std::endl;
+        printf("X is negative\n");
     }
     else {
-        std::cout << "X is 0 bruh" << std::endl;
+        printf("X is 0 bruh\n");
     }
     return 0;
 }

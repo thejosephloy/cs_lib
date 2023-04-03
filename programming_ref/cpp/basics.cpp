@@ -1,9 +1,11 @@
 #include <iostream>
+#include <string>
+//#include "exampleClass.hpp"
 
 int main(int argc, char* argv[]) {
 	// variables
     int x = 1;
-    char* oldstr = "whats up pahtnuh\n";
+    std::string oldstr = "whats up pahtnuh\n";
     bool swayHasTheAnswers = false;
     
     // If else
@@ -23,4 +25,20 @@ int main(int argc, char* argv[]) {
         std::cout << "X is 0 bruh" << std::endl;
     }
 	return 0;
+    
+    // for loop
+    for (int i = 0; i < 4; i++) {
+        std::cout << "i is " << i << std::endl;
+    }
+    // while loop
+    x = 3;
+    while (x > 0) {
+        std::cout << "x is " << x << std::endl;
+    }
+    //class instantiation
+    //exampleClass test;
+    //test.exampleFunction();
+    //calling class function
+    
+    
 }
