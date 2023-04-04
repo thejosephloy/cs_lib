@@ -1,6 +1,12 @@
+// include statements for built in libraries use <>
 #include <stdio.h>
+// include statements for user files use ""
 #include "example.h"
 
+// Function declarations
+// returnType functionName(args) {
+// ...
+// }
 void testFunc() {
     printf("Testing");
 }
