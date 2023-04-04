@@ -1,17 +1,20 @@
 #include <iostream>
+#include <string>
 #include "exampleClass.hpp"
 
 exampleClass::exampleClass() {
-
+    std::cout << "Class has been created" << std::endl;
 }
 
-void exampleClass::setup(int x) {
+void exampleClass::setInt(int x) {
     var1 = x;
-    std::cout << "test var 1 is " << var1 << std::endl;
-    std::cout << "test var 2 is " << testVar2 << std::endl;
 }
 
-int exampleClass::addN(int N) {
-	var1 += N;
-    return var1;
+void exampleClass::setStr(std::string x) {
+    var2 = x;
+}
+
+void exampleClass::printState() {
+    std::cout << "var 1 is " << var1 << std::endl;
+    std::cout << "var 2 is " << var2 << std::endl;
 }

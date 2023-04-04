@@ -4,6 +4,7 @@
 
 int main(int argc, char* argv[]) {
 	// variables
+    
     int x = 1;
     std::string oldstr = "whats up pahtnuh\n";
     bool swayHasTheAnswers = false;
@@ -24,7 +25,6 @@ int main(int argc, char* argv[]) {
     else {
         std::cout << "X is 0 bruh" << std::endl;
     }
-	return 0;
     
     // for loop
     for (int i = 0; i < 4; i++) {
@@ -34,14 +34,17 @@ int main(int argc, char* argv[]) {
     x = 3;
     while (x > 0) {
         std::cout << "x is " << x << std::endl;
+        x--;
     }
     
-    int N = 5;
     //class instantiation
-    exampleClass test;
-    test.setup(x);
-    std::cout << test.addN(N) << std::endl;
-    //calling class function
+    exampleClass instance;
     
+    //calling class function
+    int intVar = 7;
+    std::string strVar = "DATBOIJOE";
+    instance.setInt(intVar);
+    instance.setStr(strVar);
+    instance.printState();
     return 0;
 }

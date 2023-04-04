@@ -1,1 +1,2 @@
-g++ -o basics basics.cpp exampleClass.cpp
+main:
+	g++ -o basics basics.cpp exampleClass.cpp 

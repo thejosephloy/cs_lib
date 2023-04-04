@@ -1,20 +1,18 @@
-#ifndef exampleClass_hpp
-#define exampleClass_hpp
+#ifndef EXAMPLECLASS_H
+#define EXAMPLECLASS_H
 
 #include <string>
 
 class exampleClass {
-    
-    // Member variable declarations
-    private:
-        int var1;
-        std::string testVar2 = "test\n";
-    
-    // Public function declarations
     public:
         exampleClass();
-        void setup(int x);
-        int addN(int N);
+        void setInt(int x);
+        void setStr(std::string x);
+        void printState();
+    
+    private:
+        int var1;
+        std::string var2;
 };
 
 #endif
