@@ -6,8 +6,8 @@ void testFunc() {
 }
 
 int addN(int* x, int n) {
-    printf("x was %d", *x);
+    printf("x was %d\n", *x);
     (*x) = (*x) + n;
-    printf("x is %d", *x);
+    printf("x is %d\n", *x);
     return *x;
 }

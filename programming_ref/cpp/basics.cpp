@@ -69,6 +69,8 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+// Function declarations for helper functions are usually added after the
+// main function
 void testFunction() {
     std::cout << "Test function has been called" << std::endl;
 }

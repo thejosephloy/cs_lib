@@ -1,1 +1,2 @@
-gcc -o app basics.c example.c
+main:
+	gcc -o basics basics.c example.c
