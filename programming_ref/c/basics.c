@@ -4,6 +4,12 @@
 // Include statements for user specified libraries
 #include "example.h"
 
+// Struct declarations
+struct exampleStruct {
+	int structVar1;
+	char* structVar2;
+}; // Dont forget semicolon
+
 // The main function is the entry point for a program
 // Each program must contain 1 main function,
 // and no other function in the program can be named main
@@ -13,6 +19,10 @@ int main(int argc, char* argv[]) {
     int x = 1;
     char* oldstr = "whats up pahtnuh\n";
     bool swayHasTheAnswers = false;
+    struct exampleStruct s1;
+    s1.structVar1 = 12;
+    s1.structVar2 = oldstr;
+    printf("var 1 is %d, var 2 is %s\n", s1.structVar1, s1.structVar2);
     
     // Conditional logic
     // If else
