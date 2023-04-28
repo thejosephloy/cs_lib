@@ -82,6 +82,27 @@ int partition(vector<int>& A, int p, int r) {
 	return i + 1;
 }
 
+int rand_partition(vector<int>& A, int p, int r) {
+    random_device rd; // obtain a random number from hardware
+    mt19937 gen(rd()); // seed the generator
+    uniform_int_distribution<> distr(p, r);
+    int i = distr(gen);
+    int temp = A[i];
+    A[i] = A[r];
+    A[r] = temp;
+    return partition(A, p, r);
+}
+
+
+void rand_quicksort(vector<int>& A, int p, int r) {
+	if (p < r) {
+		int q = rand_partition(A, p, r);
+		rand_quicksort(A, p, q - 1);
+		rand_quicksort(A, q + 1, r);
+	}
+	
+}
+
 // quicksort
 void quicksort(vector<int>& A, int p, int r) {
 	if (p < r) {
