@@ -81,7 +81,7 @@ int partition(vector<int>& A, int p, int r) {
 	A[r] = temp;
 	return i + 1;
 }
-
+// sub-routine for rand_quicksort
 int rand_partition(vector<int>& A, int p, int r) {
     random_device rd; // obtain a random number from hardware
     mt19937 gen(rd()); // seed the generator
@@ -93,7 +93,7 @@ int rand_partition(vector<int>& A, int p, int r) {
     return partition(A, p, r);
 }
 
-
+// randomized quicksort
 void rand_quicksort(vector<int>& A, int p, int r) {
 	if (p < r) {
 		int q = rand_partition(A, p, r);
@@ -113,6 +113,38 @@ void quicksort(vector<int>& A, int p, int r) {
 	
 }
 
+// insertionsort
+void insertionsort(vector<int>& A) {
+  for (int j = 0; j < A.size(); j++) {
+    int key = A[j];
+    int i = j - 1;
+    while ( i >= 0 & A[i] > key ) {
+      A[i + 1] = A[i];
+      i = i - 1;
+    }
+    A[i + 1] = key;
+  }
+}
+
+// countingsort
+// BUGGY 
+void countingsort(vector<int>& A, vector<int>& B, int k) {
+  vector<int> C(k + 1, 0);
+
+  for (int j = 0; j < A.size() - 1; j++) {
+    C[A[j]] = C[A[j]] + 1;
+  }
+
+  for (int i = 0; i < k + 1; i++) {
+    C[i] = C[i] - C[i - 1];
+  }
+
+  for (int j = A.size() - 1; j > -1; j--) {
+    B[C[A[j]]] = A[j];
+    C[A[j]] = C[A[j]] - 1;
+  }
+}
+
 int main(int argc, char** argv) {
 	cout << "Main program is running" << endl;
 	
@@ -120,17 +152,19 @@ int main(int argc, char** argv) {
 	vector<int> v(size, 0);
 	random_device rd; // obtain a random number from hardware
     	mt19937 gen(rd()); // seed the generator
-    	uniform_int_distribution<> distr(-1000, 1000); // define the range
+    	uniform_int_distribution<> distr(0, 9); // define the range
 	cout << "List is :" << endl;
     	for(int i = 0; i < size; i++) {
 		v[i] = distr(gen);
 		cout << v[i] << endl;
 	}
-
+	/*
 	int p = 0;
 	int r = size - 1;
-	quicksort(v, p, r);
-
+	rand_quicksort(v, p, r);
+	*/
+	vector<int> b(size, 0);
+	countingsort(v, b, 10);
 	cout << "Sorted list is :" <<  endl;
 
 	for (int i = 0; i < size; i++) {
