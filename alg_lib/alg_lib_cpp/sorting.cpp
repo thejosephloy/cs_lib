@@ -127,7 +127,6 @@ void insertionsort(vector<int>& A) {
 }
 
 // countingsort
-// BUGGY 
 void countingsort(vector<int>& A, vector<int>& B, int k) {
   vector<int> C(k + 1, 0);
 
@@ -136,7 +135,7 @@ void countingsort(vector<int>& A, vector<int>& B, int k) {
   }
 
   for (int i = 0; i < k + 1; i++) {
-    C[i] = C[i] - C[i - 1];
+    C[i] = C[i] + C[i - 1];
   }
 
   for (int j = A.size() - 1; j > -1; j--) {
@@ -168,7 +167,7 @@ int main(int argc, char** argv) {
 	cout << "Sorted list is :" <<  endl;
 
 	for (int i = 0; i < size; i++) {
-                cout << v[i] << endl;
+                cout << b[i] << endl;
         }
 
 	
