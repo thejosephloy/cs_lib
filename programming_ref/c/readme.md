@@ -1,14 +1,8 @@
 # C Ref
 
-## Variables
+## Processes
 
-## Conditional Logic
+## Threads
 
-## Loops
 
-## Functions
-
-## Classes
-
-## Parallel Programming
 
