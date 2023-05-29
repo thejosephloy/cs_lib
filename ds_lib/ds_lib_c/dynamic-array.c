@@ -71,8 +71,14 @@ void set_at(DynamicArray s, int i, void* x) {
 }
 
 void resize(DynamicArray* s) {
-	realloc((*s).arr, (2 * (*s).size));
-	(*s).size = 2 * (*s).size;
+	
+	void *tmp = realloc((*s).arr, (2 * (*s).size));
+	if (tmp == NULL) {
+		exit(0); // if realloc fails for now we naively exit
+	} else {
+		(*s).size = 2 * (*s).size;
+	}
+	
 }
 
 void insert_at(DynamicArray* s, int i, void* x) {
