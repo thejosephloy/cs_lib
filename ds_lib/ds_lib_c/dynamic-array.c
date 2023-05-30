@@ -14,7 +14,7 @@ void print(DynamicArray s);
 int len(DynamicArray s);
 void* get_at(DynamicArray s, int i);
 void set_at(DynamicArray s, int i, void* x);
-void resize(DynamicArray *s);
+static void resize(DynamicArray *s);
 void insert_at(DynamicArray* s, int i, void* x);
 void delete_at(DynamicArray* s, int i);
 void insert_last(DynamicArray* s, void* x);
@@ -70,7 +70,7 @@ void set_at(DynamicArray s, int i, void* x) {
 	memcpy(((char*)s.arr + (i * s.elemSize)), x, s.elemSize);
 }
 
-void resize(DynamicArray* s) {
+static void resize(DynamicArray* s) {
 	
 	void *tmp = realloc((*s).arr, (2 * (*s).size));
 	if (tmp == NULL) {

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define INIT_STACK {NULL, 0, 0, 1}
+#define INIT_STACK {NULL, 0, 0, 4}
 
 typedef struct Stack {
 	void* s_ptr;
@@ -14,9 +14,9 @@ typedef struct Stack {
 
 bool is_empty(Stack* s);
 void push(Stack* s, void* x);
-void* pop(Stack* s);
+void pop(Stack* s, void* elemAddr);
 void peek(Stack* s);
-void resize(Stack* s);
+static void resize(Stack* s);
 
 int main(int argc, char*argv[]) {
 	Stack s1 = INIT_STACK;
@@ -27,15 +27,19 @@ int main(int argc, char*argv[]) {
 	s1.s_ptr = malloc(s1.elemSize);
 	push(&s1, &a1);
 	peek(&s1);
-	/*
+	
 	push(&s1, &a2);
 	peek(&s1);
 	push(&s1, &a3);
-	*/
+	peek(&s1);
+	void* returnVal = malloc(s1.elemSize);
+	pop(&s1, returnVal);
+	peek(&s1);
+	printf("%d", *(int*)returnVal);
 	return 0;
 }
 
-void resize(Stack* s) {
+static void resize(Stack* s) {
 	void* tmp = realloc((*s).s_ptr, (2 * (*s).stackSize));
 	if (tmp == NULL) {
 		exit(0); // if realloc fails for now we naively exit
@@ -54,14 +58,14 @@ void push(Stack* s, void* x) {
 	(*s).numElems += 1;
 }
 
-void* pop(Stack* s) {
-	if ((*s).numElems = 0) return NULL;
-	void* top = (char*)(*s).s_ptr + (((*s).numElems * (*s).elemSize) - 1);
+void pop(Stack* s, void* elemAddr) {
+	if ((*s).numElems == 0) return;
+	void* top = (char*)(*s).s_ptr + (((*s).numElems - 1) * (*s).elemSize);
+	memcpy(elemAddr, top, (*s).elemSize);
 	(*s).numElems -= 1;
-	return top;
 }
 
 void peek(Stack* s) {
-	printf("s[top] is : %d\n", *(int*)((char*)(*s).s_ptr + ((*s).numElems * (*s).elemSize) - 1));
+  printf("s[top] is : %d\n", *(int*)((char*)(*s).s_ptr + ((*s).numElems - 1 ) * (*s).elemSize));
 }
 
