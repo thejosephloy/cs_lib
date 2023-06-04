@@ -8,10 +8,11 @@ typedef struct Node{
 } Node;
 
 typedef struct LinkedList{
-	Node* head;
+  Node* base;
+  Node* head;
 	Node* tail;
 	int numElems;
-	int valSize;
+	int elemSize;
 } LinkedList;
 
 void build(void* dst, void* src, int numElems, int elemSize);
