@@ -3,28 +3,28 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define INIT_STACK {NULL, 0, 0, 4}
+#define INIT_stack {NULL, 0, 0, 4}
 
-typedef struct Stack {
-	void* s_ptr;
+typedef struct stack {
+	void* base;
 	int numElems;
 	int elemSize;
-	int stackSize;
-} Stack;
+	int allocSize;
+} stack;
 
-bool is_empty(Stack* s);
-void push(Stack* s, void* x);
-void pop(Stack* s, void* elemAddr);
-void peek(Stack* s);
-static void resize(Stack* s);
+bool is_empty(stack* s);
+void push(stack* s, void* x);
+void pop(stack* s, void* elemAddr);
+void peek(stack* s);
+static void resize(stack* s);
 
 int main(int argc, char*argv[]) {
-	Stack s1 = INIT_STACK;
+	stack s1 = INIT_stack;
 	s1.elemSize = sizeof(int);
 	int a1 = 1;
 	int a2 = 2;
 	int a3 = 3;
-	s1.s_ptr = malloc(s1.elemSize);
+	s1.base = malloc(s1.elemSize);
 	push(&s1, &a1);
 	peek(&s1);
 	
@@ -35,37 +35,38 @@ int main(int argc, char*argv[]) {
 	void* returnVal = malloc(s1.elemSize);
 	pop(&s1, returnVal);
 	peek(&s1);
-	printf("%d", *(int*)returnVal);
+	printf("return val is %d\n", *(int*)returnVal);
 	return 0;
 }
 
-static void resize(Stack* s) {
-	void* tmp = realloc((*s).s_ptr, (2 * (*s).stackSize));
+static void resize(stack* s) {
+	void* tmp = realloc((*s).base, (2 * (*s).allocSize));
 	if (tmp == NULL) {
 		exit(0); // if realloc fails for now we naively exit
 	} else {
-		(*s).stackSize = 2 * (*s).stackSize;
+		(*s).allocSize = 2 * (*s).allocSize;
 	}
 }
 
-bool is_empty(Stack* s) {
+bool is_empty(stack* s) {
 	if ((*s).numElems == 0) return true;
 	else return false;
 }
 
-void push(Stack* s, void* x) {
-	memcpy((char*)(*s).s_ptr + ((*s).numElems * (*s).elemSize), x, (*s).elemSize);
+void push(stack* s, void* x) {
+	if ((*s).numElems == (*s).allocSize) resize(s);
+	memcpy((char*)(*s).base + ((*s).numElems * (*s).elemSize), x, (*s).elemSize);
 	(*s).numElems += 1;
 }
 
-void pop(Stack* s, void* elemAddr) {
+void pop(stack* s, void* elemAddr) {
 	if ((*s).numElems == 0) return;
-	void* top = (char*)(*s).s_ptr + (((*s).numElems - 1) * (*s).elemSize);
+	void* top = (char*)(*s).base + (((*s).numElems - 1) * (*s).elemSize);
 	memcpy(elemAddr, top, (*s).elemSize);
 	(*s).numElems -= 1;
 }
 
-void peek(Stack* s) {
-  printf("s[top] is : %d\n", *(int*)((char*)(*s).s_ptr + ((*s).numElems - 1 ) * (*s).elemSize));
+void peek(stack* s) {
+  printf("s[top] is : %d\n", *(int*)((char*)(*s).base + ((*s).numElems - 1 ) * (*s).elemSize));
 }
 

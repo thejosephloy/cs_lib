@@ -4,15 +4,14 @@
 #include <stdbool.h>
 
 
-#define INIT_QUEUE {NULL, NULL, 0, 0, 4};
+#define INIT_QUEUE {NULL, 0, 0, 0, 4};
 
 typedef struct queue {
   void* base;
-  void* head;
-  void* tail;
-  int numElems;
+  int head;
+  int tail;
   int elemSize;
-  int allocSize;
+  int allocSize; // allocSize is the max number of elements that can currently be stored in queue
 } queue;
 
 void enqueue(queue* q, void* x);
@@ -22,25 +21,68 @@ void peek(queue* q);
 static void resize(queue* q);
 
 int main(int argc, char*argv[]) {
-
+	queue q1 = INIT_QUEUE;
+	q1.elemSize = sizeof(int);
+	q1.base = malloc(4 * q1.elemSize);
+	int a1 = 1;
+	int a2 = 2;
+	int a3 = 3;
+	enqueue(&q1, &a1);
+	printf("q.head is %d q.tail is %d \n", q1.head, q1.tail);
+	peek(&q1);
+	
+	enqueue(&q1, &a2);
+	printf("q.head is %d q.tail is %d \n", q1.head, q1.tail);
+	peek(&q1);
+	
+	enqueue(&q1, &a3);
+	printf("q.head is %d q.tail is %d \n", q1.head, q1.tail);
+	peek(&q1);
+	
+	void* r1 = malloc(q1.elemSize);
+	dequeue(&q1, r1);
+	peek(&q1);
+	
+	void* r2 = malloc(q1.elemSize);
+	dequeue(&q1, r2);
+	peek(&q1);
+	
+	void* r3 = malloc(q1.elemSize);
+	dequeue(&q1, r3);
+	peek(&q1);
+	
+	return 0;
 }
 
 void resize(queue* q) {
-
+	void* tmp = realloc((*q).base, (2 * (*q).allocSize));
+	if (tmp == NULL) {
+		exit(0); // if realloc fails for now we naively exit
+	} else {
+		(*q).allocSize = 2 * (*q).allocSize;
+	}
 }
 
 void enqueue(queue* q, void* x) {
-
+	if ((*q).head == (*q).tail) resize(q);
+	memcpy((char*)(*q).base + ((*q).tail * (*q).elemSize), x, (*q).elemSize);
+	if ((*q).tail == (*q).allocSize - 1) (*q).tail = 0;
+	else (*q).tail += 1; 
 }
 
 void dequeue(queue* q, void* elemAddr) {
-
+	if (is_empty(q)) return;
+	void* head = (char*)(*q).base + ((*q).head * (*q).elemSize);
+	memcpy(elemAddr, head, (*q).elemSize);
+	if ((*q).head == (*q).allocSize - 1) (*q).head = 0;
+	else (*q).head += 1;
 }
 
 bool is_empty(queue* q) {
-
+	if ((*q).head == (*q).tail) return true;
+	else return false;
 }
 
 void peek(queue* q) {
-
+	printf("q[head] is : %d\n", *(int*)((char*)(*q).base + ((*q).head * (*q).elemSize)));
 }
