@@ -67,6 +67,7 @@ void pop(stack* s, void* elemAddr) {
 }
 
 void peek(stack* s) {
-  printf("s[top] is : %d\n", *(int*)((char*)(*s).base + ((*s).numElems - 1 ) * (*s).elemSize));
+  if (is_empty(s)) printf("stack is currently empty\n");
+  else printf("s[top] is : %d\n", *(int*)((char*)(*s).base + ((*s).numElems - 1 ) * (*s).elemSize));
 }
 

@@ -28,15 +28,12 @@ int main(int argc, char*argv[]) {
 	int a2 = 2;
 	int a3 = 3;
 	enqueue(&q1, &a1);
-	printf("q.head is %d q.tail is %d \n", q1.head, q1.tail);
 	peek(&q1);
 	
 	enqueue(&q1, &a2);
-	printf("q.head is %d q.tail is %d \n", q1.head, q1.tail);
 	peek(&q1);
 	
 	enqueue(&q1, &a3);
-	printf("q.head is %d q.tail is %d \n", q1.head, q1.tail);
 	peek(&q1);
 	
 	void* r1 = malloc(q1.elemSize);
@@ -50,7 +47,7 @@ int main(int argc, char*argv[]) {
 	void* r3 = malloc(q1.elemSize);
 	dequeue(&q1, r3);
 	peek(&q1);
-	
+	printf("r1 is %d, r2 is %d, r3 is %d\n", *(int*)r1, *(int*)r2, *(int*)r3); 
 	return 0;
 }
 
@@ -84,5 +81,6 @@ bool is_empty(queue* q) {
 }
 
 void peek(queue* q) {
-	printf("q[head] is : %d\n", *(int*)((char*)(*q).base + ((*q).head * (*q).elemSize)));
+	if (is_empty(q)) printf("queue is currently empty\n");
+	else printf("q[head] is : %d\n", *(int*)((char*)(*q).base + ((*q).head * (*q).elemSize)));
 }
