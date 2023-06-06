@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-
 #define INIT_QUEUE {NULL, 0, 0, 0, 4};
 
 typedef struct queue {
