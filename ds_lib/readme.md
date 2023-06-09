@@ -1,25 +1,32 @@
 # Data Structures
 
+## Static Array
+
+## Dynamic Array
+
 ## Stack
 
 ## Queue
 
-## Hash Table
+## Hash Set
 
-## Priority Queue
-
-## Pointer
+## Hash Map
 
 ## Linked List
 
+## Priority Queue
+
+## Binary Heap
+
 ## Binary Search Tree
+
+## AVL Tree
 
 ## Red-Black Tree
 
 ## B-Tree
 
-## Fibonacci Heap
-
 ## van Emde Boas Tree
 
+## Fibonacci Heap
 
