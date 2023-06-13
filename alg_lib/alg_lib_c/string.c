@@ -4,10 +4,10 @@
 void naive_matcher(char* T, char* P);
 void rk_matcher(char* T, char* P, int d, int q);
 void kmp_matcher(char* T, char* P);
-int* compute_prefix_function(char* P);
+void compute_prefix_function(char* P, int pi[]);
 
 int main(int argc, char* argv[]) {
-	char* T = "Hello\0";
+	char* T = "Hello Hello\0";
 	char* P = "ll\0";
 	printf("Enter naive string matcher\n");
 	naive_matcher(T, P);
@@ -15,6 +15,9 @@ int main(int argc, char* argv[]) {
 	printf("Enter rk matcher\n");
 	rk_matcher(T, P, 256, 101);
 	printf("Leaving rk matcher\n");
+	printf("Enter KMP string matcher\n");
+	kmp_matcher(T, P);
+	printf("Leaving KMP string matcher\n");
 	return 0;
 }
 
@@ -58,6 +61,37 @@ void rk_matcher(char* T, char* P, int d, int q) {
 				t = (d * (t - T[s] * h) + T[s + m]) % q;
 			}
 		}
+	}
+}
+
+void kmp_matcher(char* T, char* P) {
+	int n = strlen(T);
+	int m = strlen(P);
+	int pi[m];
+	compute_prefix_function(P, pi);
+	int q = 0;
+	for (int i = 0; i < n; i++) {
+		while (q > 0 && P[q] != T[i]) q = pi[q];
+		if (P[q] == T[i]) q++;
+		if (q==m) {
+			printf("Pattern occurs with shift %d\n", i - m + 1);
+			q = pi[q-1];
+		}
+	}
+}
+
+void compute_prefix_function(char* P, int pi[]) {
+	int m = strlen(P);
+	int k = 0;
+	for (int i = 0; i < m; i++) {
+		pi[i] = 0;
+	}
+	for (int q = 1; q < m; q++) {
+		while (k > 0 && P[k] != P[q-1]) {
+			k = pi[k];
+		}
+		if (P[k] == P[q-1]) k++;
+		pi[q-1] = k;
 	}
 }
 
