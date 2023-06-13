@@ -11,10 +11,10 @@ int main(int argc, char* argv[]) {
 	char* P = "ll\0";
 	printf("Enter naive string matcher\n");
 	naive_matcher(T, P);
-	printf("Leaving naive string matcher\n");
+	printf("Leaving naive string matcher\n\n");
 	printf("Enter rk matcher\n");
 	rk_matcher(T, P, 256, 101);
-	printf("Leaving rk matcher\n");
+	printf("Leaving rk matcher\n\n");
 	printf("Enter KMP string matcher\n");
 	kmp_matcher(T, P);
 	printf("Leaving KMP string matcher\n");
