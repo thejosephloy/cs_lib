@@ -9,21 +9,24 @@
 
 using namespace std;
 
-// Counting sort
+template <typename T> void insertionsort(vector<T>& A, int size) {
+  for (int j = 0; j < size; j++) {
+    T key = A[j];
+    int i = j - 1;
+    while ( (i >= 0) & (A[i] > key) ) {
+      A[i + 1] = A[i];
+      i = i - 1;
+    }
+    A[i + 1] = key;
+  }
+}
 
-// Radix sort
-
-// bucket sort
-
-// randomized select 
-
-// subroutine for mergesort 
-vector<int> merge(vector<int>& A, int p, int q, int r) {
-	// merge
+template <typename T> vector<T> merge(vector<T>& A, int p, int q, int r) {
+  // merge
 	int n1 = q - p + 1;
 	int n2 = r - q;
-	vector<int> L(n1 + 1, 0);
-	vector<int> R(n2 + 1, 0);
+	vector<T> L(n1 + 1);
+	vector<T> R(n2 + 1);
 
 	for (int i = 1; i < n1 + 1; i++) {
 		L[i - 1] = A[p + i - 1];
@@ -33,8 +36,8 @@ vector<int> merge(vector<int>& A, int p, int q, int r) {
 		R[j - 1] = A[q + j];
 	}
 	
-	L[n1] = numeric_limits<int>::max();
-	R[n2] = numeric_limits<int>::max();
+	L[n1] = numeric_limits<T>::max();
+	R[n2] = numeric_limits<T>::max();
 
 	int i = 0;
 	int j = 0;
@@ -52,79 +55,69 @@ vector<int> merge(vector<int>& A, int p, int q, int r) {
 	
 	return A;
 }
-// mergesort 
-vector<int> mergesort(vector<int>& A, int p, int r) {
-	if (p < r) {
+
+template <typename T> vector<T> mergesort(vector<T>& A, int p, int r) {
+        if (p < r) {
 		int q = (p + r) / 2;
-		vector<int> L = mergesort(A, p, q);
-		vector<int> R = mergesort(A, q + 1, r);
+		vector<T> L = mergesort(A, p, q);
+		vector<T> R = mergesort(A, q + 1, r);
 		A = merge(A, p, q, r);
 	}
 	return A;
 }
-// sub routine for quicksort 
-int partition(vector<int>& A, int p, int r) {
-	int x = A[r];
-	int i = p - 1;
-	for (int j = p; j <= r-1; j++) {
-		if (A[j] <= x) {
-			i += 1;
-			// Swap A[i] and A[j]
-			int temp = A[i];
-			A[i] = A[j];
-			A[j] = temp;
-		}
+
+
+template <typename T> int partition(vector<T>& A, int p, int r) {
+    T x = A[r];
+    int i = p - 1;
+    for (int j = p; j <= r-1; j++) {
+        if (A[j] <= x) {
+	    i += 1;
+	    // Swap A[i] and A[j]
+	    T temp = A[i];
+	    A[i] = A[j];
+	    A[j] = temp;
 	}
-	// Swap A[i + 1] with A[r]
-	int temp = A[i + 1];
-	A[i + 1] = A[r];
-	A[r] = temp;
-	return i + 1;
+    }
+    // Swap A[i + 1] with A[r]
+    T temp = A[i + 1];
+    A[i + 1] = A[r];
+    A[r] = temp;
+    return i + 1;
 }
-// sub-routine for rand_quicksort
-int rand_partition(vector<int>& A, int p, int r) {
+
+template <typename T> void quicksort(vector<T>& A, int p, int r) {
+  if (p < r) {
+    int q = partition(A, p, r);
+    quicksort(A, p, q - 1);
+    quicksort(A, q + 1, r);
+  }
+}
+
+template <typename T> int rand_partition(vector<T>& A, int p, int r) {
     random_device rd; // obtain a random number from hardware
     mt19937 gen(rd()); // seed the generator
     uniform_int_distribution<> distr(p, r);
     int i = distr(gen);
-    int temp = A[i];
+    T temp = A[i];
     A[i] = A[r];
     A[r] = temp;
     return partition(A, p, r);
 }
 
-// randomized quicksort
-void rand_quicksort(vector<int>& A, int p, int r) {
-	if (p < r) {
-		int q = rand_partition(A, p, r);
-		rand_quicksort(A, p, q - 1);
-		rand_quicksort(A, q + 1, r);
-	}
-	
-}
-
-// quicksort
-void quicksort(vector<int>& A, int p, int r) {
-	if (p < r) {
-		int q = partition(A, p, r);
-		quicksort(A, p, q - 1);
-		quicksort(A, q + 1, r);
-	}
-	
-}
-
-// insertionsort
-void insertionsort(vector<int>& A) {
-  for (int j = 0; j < A.size(); j++) {
-    int key = A[j];
-    int i = j - 1;
-    while ( i >= 0 & A[i] > key ) {
-      A[i + 1] = A[i];
-      i = i - 1;
-    }
-    A[i + 1] = key;
+template <typename T> void rand_quicksort(vector<T>& A, int p, int r) {
+  if (p < r) {
+    int q = rand_partition(A, p, r);
+    rand_quicksort(A, p, q - 1);
+    rand_quicksort(A, q + 1, r);
   }
 }
+
+// Radix sort
+
+// bucket sort
+
+// randomized select 
 
 // countingsort
 void countingsort(vector<int>& A, vector<int>& B, int k) {
@@ -157,17 +150,18 @@ int main(int argc, char** argv) {
 		v[i] = distr(gen);
 		cout << v[i] << endl;
 	}
-	/*
+	
 	int p = 0;
 	int r = size - 1;
 	rand_quicksort(v, p, r);
-	*/
+	
+	/*
 	vector<int> b(size, 0);
 	countingsort(v, b, 10);
 	cout << "Sorted list is :" <<  endl;
-
+	*/
 	for (int i = 0; i < size; i++) {
-                cout << b[i] << endl;
+                cout << v[i] << endl;
         }
 
 	
